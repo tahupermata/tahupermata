@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
 }
+
+/* Global input typography and contrast guarantees */
+input, select, textarea {
+  color: #0f172a;
+}
+
+/* Dark mode inputs (Login & Dark surfaces) */
+.dark-input,
+.dark input,
+[data-theme="dark"] input {
+  color: #ffffff !important;
+  background-color: #020617 !important;
+  border-color: #334155 !important;
+}
+
+.dark-input::placeholder {
+  color: #64748b !important;
+}
+
+.dark-input:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25) !important;
+  outline: none !important;
+}
+
+/* Chrome / Safari / Edge Autofill Fix for Dark Inputs */
+.dark-input:-webkit-autofill,
+.dark-input:-webkit-autofill:hover, 
+.dark-input:-webkit-autofill:focus, 
+.dark-input:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0px 1000px #020617 inset !important;
+  box-shadow: 0 0 0px 1000px #020617 inset !important;
+  caret-color: #ffffff !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Autofill for Light Inputs */
+input:not(.dark-input):-webkit-autofill,
+input:not(.dark-input):-webkit-autofill:hover,
+input:not(.dark-input):-webkit-autofill:focus {
+  -webkit-text-fill-color: #0f172a !important;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  caret-color: #0f172a !important;
+}
+
+/* Hide Next.js Dev Indicator Badge ("N" logo) on Mobile/Screen */
+nextjs-portal {
+  display: none !important;
+}
+
+/* No Scrollbar Utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
