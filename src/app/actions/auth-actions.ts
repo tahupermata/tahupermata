@@ -10,12 +10,13 @@ import { redirect } from 'next/navigation';
 const SESSION_COOKIE_NAME = 'sales_mgmt_session_user_id';
 
 export async function switchUserAction(userId: string) {
+  const isProd = process.env.NODE_ENV === 'production';
   const cookieStore = await cookies();
   cookieStore.set(SESSION_COOKIE_NAME, userId, {
     path: '/',
     httpOnly: true,
     sameSite: 'lax',
-    secure: false,
+    secure: isProd,
     maxAge: 60 * 60 * 24 * 30, // 30 days
   });
   revalidatePath('/', 'layout');
@@ -47,12 +48,13 @@ export async function loginAction(prevState: any, formData: FormData) {
     return { error: 'Akun Anda sedang dinonaktifkan. Hubungi admin.' };
   }
 
+  const isProd = process.env.NODE_ENV === 'production';
   const cookieStore = await cookies();
   cookieStore.set(SESSION_COOKIE_NAME, user.id, {
     path: '/',
     httpOnly: true,
     sameSite: 'lax',
-    secure: false,
+    secure: isProd,
     maxAge: 60 * 60 * 24 * 30,
   });
 
